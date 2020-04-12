@@ -1,0 +1,87 @@
+[
+    {
+        "module": "../mbed-os-build-i2c",
+        "size": {
+            ".data-delta": 0,
+            ".text": 38989,
+            ".bss-delta": 0,
+            ".bss": 6770,
+            ".text-delta": 0,
+            ".data": 473
+        }
+    },
+    {
+        "module": "BUILD/K66F",
+        "size": {
+            ".data-delta": 0,
+            ".text": 848,
+            ".bss-delta": 0,
+            ".bss": 247,
+            ".text-delta": 0,
+            ".data": 4
+        }
+    },
+    {
+        "module": "[fill]",
+        "size": {
+            ".data-delta": 0,
+            ".text": 204,
+            ".bss-delta": 0,
+            ".bss": 42,
+            ".text-delta": 0,
+            ".data": 7
+        }
+    },
+    {
+        "module": "[lib]/c.a",
+        "size": {
+            ".data-delta": 0,
+            ".text": 34865,
+            ".bss-delta": 0,
+            ".bss": 89,
+            ".text-delta": 0,
+            ".data": 2472
+        }
+    },
+    {
+        "module": "[lib]/gcc.a",
+        "size": {
+            ".data-delta": 0,
+            ".text": 3112,
+            ".bss-delta": 0,
+            ".bss": 0,
+            ".text-delta": 0,
+            ".data": 0
+        }
+    },
+    {
+        "module": "[lib]/misc",
+        "size": {
+            ".data-delta": 0,
+            ".text": 180,
+            ".bss-delta": 0,
+            ".bss": 28,
+            ".text-delta": 0,
+            ".data": 4
+        }
+    },
+    {
+        "module": "[lib]/nosys.a",
+        "size": {
+            ".data-delta": 0,
+            ".text": 32,
+            ".bss-delta": 0,
+            ".bss": 0,
+            ".text-delta": 0,
+            ".data": 0
+        }
+    },
+    {
+        "summary": {
+            "total_flash": 81190,
+            "static_ram": 10136,
+            "static_ram_delta": 0,
+            "total_flash_delta": 0
+        }
+    }
+]
