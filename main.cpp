@@ -48,12 +48,13 @@
 I2C i2c( PTD9,PTD8);
 
 Serial pc(USBTX, USBRX);
-
+Timer mytime;
 EventQueue queue;
 DigitalOut led(LED1);
 int m_addr = FXOS8700CQ_SLAVE_ADDR1;
+InterruptIn sw(SW3);
 
-
+int id;
 void FXOS8700CQ_readRegs(int addr, uint8_t * data, int len);
 
 void FXOS8700CQ_writeRegs(uint8_t * data, int len);
@@ -97,15 +98,12 @@ void logger(void)
     
     printf("%1.3f\r\n%1.3f\r\n%1.3f\r\n", t[0], t[1], t[2]);
     // print x y z repevtively
+   led = !led;
+    if (t[0] * t[0] + t[1] * t[1] > t[2]*t[2])  // x^2 + y^2 > z^2
+      printf("1\r\n");
+    else 
+      printf("0\r\n");
 
-    if (t[0] * t[0] + t[1] * t[1] > t[2]*t[2]) { // x^2 + y^2 > z^2
-        led = 0; // turn on
-        printf("1\r\n");
-    }
-    else {
-        led = 1;
-        printf("0\r\n");
-    }
 }
 void FXOS8700CQ_readRegs(int addr, uint8_t * data, int len) {
 
@@ -124,6 +122,11 @@ void FXOS8700CQ_writeRegs(uint8_t * data, int len) {
 
 }
 
+void start(void)
+{
+   id = queue.call_every(100, logger);
+   mytime.start();
+}
 
 int main() {
 
@@ -144,9 +147,15 @@ int main() {
 
    FXOS8700CQ_readRegs(FXOS8700Q_WHOAMI, &who_am_i, 1);
    ///////////////////////////////////////////////////////////////////
-    Thread t;
-    t.start(callback(&queue, &EventQueue::dispatch_forever));
-    int id = queue.call_every(100, logger);
-    wait(11);
-    queue.cancel(id);
+   Thread t;//(osPriorityLow);
+
+   t.start(callback(&queue, &EventQueue::dispatch_forever)); 
+   sw.rise(&start);
+   while(1) {
+      if (mytime.read() >= 11) {
+         queue.cancel(id);
+         break;
+      }
+   }
+   
 }
